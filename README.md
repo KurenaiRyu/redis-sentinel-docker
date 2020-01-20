@@ -1,4 +1,4 @@
- 参考[stratus](https://github.com/planetlabs/stratus)
+ 参考[redis-sentinel-docker](https://github.com/s7anley/redis-sentinel-docker)
 # 部署
 docker-compse build  
 docker-compose up -d
