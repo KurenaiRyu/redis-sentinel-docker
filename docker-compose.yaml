@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  redis-master:
+    image: redis:5.0.5
+    container_name: redis-master
+    ports:
+      - 6379:6379
+    networks:
+      - app-tier
+#  redis_slave:
+#    image: redis:5.0.5
+#    container_name: redis_slave
+#    command: redis-server --slaveof redis_master 6379
+#    depends_on:
+#      - redis_master
+#    ports:
+#      - 6379:6379
+#    networks:
+#      - app-tier
+
+  sentinel:
+    image: redis-sentinel
+    build: .
+    container_name: redis-sentinel
+    environment:
+      - MSTER=redis_master  #redis-master地址
+      - MASTER_NAME=mymaster-1
+      - QUORUM=2
+      - SENTINEL_PORT=26379
+      - AUTH_PASS=123456
+      - REDIS_PORT=6379
+    depends_on:
+      - redis_master
+#      - redis_slave
+    ports:
+      - 26379:26379
