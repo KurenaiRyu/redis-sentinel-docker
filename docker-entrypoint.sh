@@ -4,10 +4,10 @@ set -e
 
 SENTINEL_CONFIGURATION_FILE=/etc/sentinel.conf
 
-QUORUM=1
-MASTER=127.0.0.1
-MASTER_NAME=mymaster
-SENTINEL_PORT=26379
+#QUORUM=1
+#MASTER=127.0.0.1
+#MASTER_NAME=mymaster
+#SENTINEL_PORT=26379
 
 if [ "$AWS_IP_DISCOVERY" ]; then
    ANNOUNCE_IP=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
